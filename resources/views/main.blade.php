@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Timetable</title>
-
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -198,6 +197,28 @@
                     @endforeach
                     </tbody>
                 </table>
+                <button class="uk-button uk-width-1-4" type="button" uk-toggle="target: #form_calc; animation: uk-animation-fade">Statystyki</button>
+                <div id="form_calc" hidden>
+                    <form action="{{ route('postCalc') }}" method="POST" class="uk-form">
+                        @csrf
+                        <div class="uk-child-width-1-3" uk-grid>
+                            <div>
+                                <label for="trial_date">Od</label>
+                                <input required class="uk-input" type="date" placeholder="Data od" name="date_from">
+                            </div>
+                            <div>
+                                <label for="trial_date">Do</label>
+                                <input required class="uk-input" type="date" placeholder="Data do" name="date_to">
+                            </div>
+                            <div class="uk-flex uk-flex-bottom">
+                                <input class="uk-button" type="submit" value="Szukaj">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                @if(session()->has('trialsQty'))
+                    <p>Liczba zdalnych rozpraw od {{session()->get('date_from')}} do {{session()->get('date_to')}} : <b>{{session()->get('trialsQty')}}</b></p>
+                @endif
             </div>
         </div>
     </body>

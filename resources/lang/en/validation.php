@@ -131,6 +131,13 @@ return [
     */
 
     'custom' => [
+        'date_to' => [
+            'required' => 'Data "do" jest wymagana',
+            'after_or_equal' => 'Data "od" musi być wcześniejsza od daty "do"'
+        ],
+        'date_from' => [
+            'required' => 'Data "od" jest wymagana'
+        ],
         'phone' => [
             'required' => 'Numer telefonu jest wymagany',
         ],

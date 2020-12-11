@@ -15,3 +15,4 @@ use App\Http\Controllers\TrialController;
 
 Route::get('/', [TrialController::class, 'getIndex']);
 Route::post('/postTrial', [TrialController::class, 'postTrial'])->name('postTrial');
+Route::post('/postCalc', [TrialController::class, 'postCalc'])->name('postCalc');

@@ -42,4 +42,14 @@ class TrialController extends Controller
          $trial->save();
          return redirect()->back()->with('message','Zgłoszenie zostało dodane');
      }
+     public function postCalc(Request $request){
+      $request->validate([
+       'date_from' => 'required',
+       'date_to' => 'required|after_or_equal:date_from'
+       ]);
+       $trialsQty = Trial::where("trial_date",">=",$request->date_from)
+       ->where("trial_date","<=",$request->date_to)
+       ->count();
+       return redirect()->back()->with(['trialsQty'=>$trialsQty,'date_from'=>$request->date_from,'date_to'=>$request->date_to]);
+   }
 }
