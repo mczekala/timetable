@@ -34,9 +34,6 @@
             label {
                 line-height: 30px;
             }
-            .app-label {
-                visibility: hidden;
-            }
             #table td{
                 text-align: center;
             }
@@ -79,7 +76,7 @@
                                 <input required class="uk-input" type="time" placeholder="Godzina" name="time">
                             </div>
                             <div>
-                                <label class="app-label" for="app">label</label>
+                                <label for="app">Aplikacja</label>
                                 <select class="uk-select" name="app" required>
                                     <option value="" hidden disabled selected>Aplikacja</option>
                                     <option value="Jitsi">Jitsi</option>
@@ -87,6 +84,7 @@
                                 </select>
                             </div>
                             <div>
+                                <label for="location">Lokalizacja</label>
                                 <select class="uk-select" name="location" required>
                                     <option value="" hidden disabled selected>Lokalizacja</option>
                                     <option value="3 maja">3 Maja</option>
@@ -94,24 +92,31 @@
                                 </select>
                             </div>
                             <div>
+                                <label for="room">Sala</label>
                                 <input required class="uk-input" type="text" placeholder="Sala" name="room">
                             </div>
                             <div>
+                                <label for="signature">Sygnatura</label>
                                 <input required class="uk-input" type="text" placeholder="Sygantura" name="signature">
                             </div>
                             <div>
-                                <input required class="uk-input" type="text" placeholder="Imie" name="first_name" pattern="[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+">
-                            </div>
-                            <div>
-                                <input required class="uk-input" type="text" placeholder="Nazwisko"  name="last_name" pattern="[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+">
-                            </div>
-                            <div>
-                                <input required class="uk-input" type="tel" placeholder="Telefon" name="phone" pattern="[0-9]+">
-                            </div>
-                            <div>
+                                <label for="dept">Wydział</label>
                                 <input required class="uk-input" type="text" placeholder="Wydział"  name="dept">
                             </div>
                             <div>
+                                <label for="first_name">Imie</label>
+                                <input required class="uk-input" type="text" placeholder="Imie" name="first_name" pattern="[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+">
+                            </div>
+                            <div>
+                                <label for="room">Nazwisko</label>
+                                <input required class="uk-input" type="text" placeholder="Nazwisko"  name="last_name" pattern="[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+">
+                            </div>
+                            <div>
+                                <label for="phone">Telefon</label>
+                                <input required class="uk-input" type="tel" placeholder="Telefon" name="phone" pattern="[0-9]+">
+                            </div>
+                            <div>
+                                <label for="link">Link</label>
                                 <input required class="uk-input" type="url" name="link" placeholder="Link">
                             </div>
                             <div>
@@ -120,7 +125,7 @@
                         </div>
                     </form>
                 </div>
-                <table id="table">
+                <table class="stripe" id="table">
                     <thead>
                         <tr>
                             <th>
@@ -142,6 +147,9 @@
                                 Sygnatura
                             </th>
                             <th>
+                                Wydział
+                            </th>
+                            <th>
                                 Imię
                             </th>
                             <th>
@@ -151,9 +159,7 @@
                                 Telefon
                             </th>
                             <th>
-                                Wydział
-                            </th>
-                            <th>
+                                Link
                             </th>
                         </tr>
                     </thead>
@@ -179,6 +185,9 @@
                                 {{$trial->signature}}
                             </td>
                             <td>
+                                {{$trial->dept}}
+                            </td>
+                            <td>
                                 {{$trial->first_name}}
                             </td>
                             <td>
@@ -188,10 +197,8 @@
                                 {{$trial->phone}}
                             </td>
                             <td>
-                                {{$trial->dept}}
-                            </td>
-                            <td>
-                                <a class="" href="{{$trial->link}}">Link</a>
+                                <div><a href="#" onclick="copyToClipboard('{{$trial->link}}')">Kopiuj</a></div>
+                                <div><a href="{{$trial->link}}">Przejdź</a></div>
                             </td>
                         </tr>
                     @endforeach
@@ -233,5 +240,12 @@
                 }
             });
         } );
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val(element).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
     </script>
 </html>
